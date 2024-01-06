@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+        {% block title %}Add Book{% endblock  %}
+        {% block style %}
+        style
+        body{
+            text-align:center
+        }
+        form{
+            direction:rtl
+        }
+        {% endblock  %}
+        {% block body %}
+        <h1>اضافه کردن کتاب</h1>
+        <!-- Add form for adding a new book -->
+
+        <form action="/book/add/" method="post">
+        {% csrf_token %}
+        نام کتاب :<br>
+        <input name="title" required>
+        <br><br>
+        نویسنده:<br>
+        <input name="author" required>
+        <br><br>
+        ژانر:<br>
+        <input name="genre" required>
+        <br><br>
+        وضعیت :
+        <select name="available" required>
+            
+            <option value="True" >
+                موجود   
+            </option>
+            <option value="False" >
+                ناموجود   
+            </option>
+            
+        </select>
+        <br><br>
+        <input type="submit" value="اضافه کردن">
+    </form>
+    {% endblock  %}

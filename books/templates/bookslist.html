@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block style %}
+
+            
+            .booklist {
+                display:flex;
+                justify-content:end;
+                list-style-type:none;
+                padding:5px;
+                box-shadow:2px 0px 2px 2px;
+            }
+            td ,tr{
+                margin:15px;
+                padding:5px 13px;
+                border : 0.2px black solid;
+            }
+            th{
+                text-align:center;
+                border : 0.2px black solid;
+            }
+            .book{
+                display:flex;
+                flex-direction:row;
+                padding:5px;
+                margin:3px;
+            }
+            .border{
+                width:20px
+                padding:3px;
+                margin:4px;
+            }
+        {% endblock style %}
+        {% block  header %} فهرست کتاب ها {% endblock  %}
+        {% block body %}
+        
+        {% if books|length > 0 %}
+
+        <table class="booklist" >
+        <tr>
+            <th>
+                عملیات
+            </th>
+            <th>
+                عملیات
+            </th>
+            <th>
+                وضعیت
+            </th>
+            <th>
+                ژانر
+            </th>
+            <th>
+                نویسنده
+            </th>
+            <th>
+                نام 
+            </th>
+            <th>
+                ایدی
+            </th>
+        </tr>
+        
+        {% for book in books %}
+        <tr>
+             <div class="book">
+
+                <td class="crudforbook">
+                        <a href="{% url 'edit_book' book.id %}">ویرایش</a>
+            </td>
+            <td class="crudforbook">
+                         <a href="{% url 'delete_book' book.id %}">حذف</a>
+            </td>
+            
+            <td class="book-available border">
+                {% if  book.available == False %}
+                <span style="color:red;">
+                    ناموجود
+                </span>
+                {% else %}
+                <span style="color:green;">
+                    موجود
+                </span>
+                {% endif %}
+            </td>
+            
+            <td class="book-genre border">
+                {{book.genre}}
+            </td>
+            
+            <td class="book-author border">
+                {{book.author}}
+            </td>
+            <td class="book-title border">
+                {{ book.title }}
+            </td>
+            <td class="book-id border" >
+                {{ book.id }}
+                
+            </td>
+         </td>
+         {% endfor %}
+        </tr>
+        </table>    
+         {% else %}
+         <p> کتابی وجود ندارد </p>
+         {% endif %}
+    </br>
+    </br>
+    <a href="{% url 'add_book' %}">اضافه کردن کتاب</a>
+    {% endblock body %}

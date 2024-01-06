@@ -1,0 +1,21 @@
+
+        {% extends "base.html" %}
+        {% block header  %}
+        اجاره کردن کتاب
+        {% endblock  %}
+        {% block body %}
+        {% comment %} {% for book in canBorrow_books %}
+               <li> <a href="{% url 'borrow_book' book.id %}">اجاره کتاب </a> {{ book.title }}</li>
+        {% endfor %} {% endcomment %}
+        <p>
+        </p>
+         {% if canBorrow_books|length > 0 %}
+           <ul>
+               {% for book in canBorrow_books %}
+               <li> <a href="{% url 'borrow_book' book.id %}">اجاره کتاب </a> {{ book.title }}</li>
+               {% endfor %}
+           </ul>
+         {% else %}
+        کتابی برای اجاره وجود ندارد
+        {% endif %}
+    {% endblock body %}

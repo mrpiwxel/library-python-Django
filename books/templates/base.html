@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>{% block title %}{% endblock  %}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+body
+{
+  font-family: 'Poppins', sans-serif;
+  text-align:right;
+  background-color:rgb(182, 182, 182);
+
+}
+
+ul
+{
+  list-style:none;
+}
+a
+{
+  text-decoration:none;
+}
+.navbar
+{
+  width:100%;
+  background-color:blue;
+  padding:30px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-direction:row-reverse;
+}
+.navbar .logo
+{
+  font-size:2em;
+  font-weight:bold;
+}
+.navbar .nav-links ul
+{
+  display:flex;
+}
+.navbar .nav-links ul li
+{
+  margin:0 25px;
+}
+
+.navbar a 
+{
+color:white;
+}
+.body{
+  margin:50px 10px;
+  padding:30px;
+  background-color: white;
+}
+h1{
+    display:block;
+    padding:10px 10px 10px 10px;
+}
+{% block style %}{% endblock style %}
+        </style>
+    </head>
+    <body>
+        <nav class="navbar">
+  <a href="#" class="logo">کتاب خانه</a>
+  <div class="nav-links">
+    <ul class="nav-menu">
+        <li><a href="{% url "borrowlist" %}">لیست کتاب های قرض داده شده</a></li>
+        <li><a href="{% url "edit_status_book_page" %}">تغییر وضعیت کتاب</a></li>
+        <li><a href="{% url "borrowing_page" %}">اجاره کتاب</a></li>
+        <li><a href="{% url "book_list" %}">مدیریت کتاب ها</a></li>
+        <li><a href="{% url "home" %}">صفحه اصلی</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="body">
+    <h1>
+    {% block header %}
+    {% endblock header %}
+    </h1>
+    {% block body %}
+    
+
+    {% endblock %}
+</div>
+    </body>
+</html>

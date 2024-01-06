@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block style %}
+        <style>
+            body{
+                text-align:center
+            }
+            form{
+                direction:rtl
+            }
+        </style>
+
+{% endblock style %}
+{% block header %}
+<h1> {{ book.title }} تغییر جزئیات کتاب</h1>
+{% endblock  %}
+{% block body %}
+<form action="/book/{{book.id}}/edit/" method="post" >
+    {% csrf_token %}
+        نام کتاب :<br>
+        <input name="title" value={{book.title}} required>
+        <br><br>
+        نویسنده:<br>
+        <input name="author" value={{book.author}} required>
+        <br><br>
+        ژانر:<br>
+        <input name="genre" value={{book.genre}} required>
+        <br><br>
+        وضعیت :
+        <select name="available" value={{book.available}} required>
+            
+            <option value="True" >
+                موجود   
+            </option>
+            <option value="False" >
+                ناموجود   
+            </option>
+            
+        </select>
+        <br><br>
+        <input type="submit" value="ثبت تغییرات">
+    </form>
+    {% endblock body %}

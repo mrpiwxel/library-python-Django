@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block header %}
+        <h2> کتاب {{book.title}} </h2>
+{% endblock header %}
+
+{% block style %}
+            body{
+                text-align:center
+            }
+            form{
+                direction:rtl
+            }
+{% endblock style %}
+{% block body %}
+        <h4>{{book.author}}</h2>
+            {% if  book.available == False %}
+        <h4>ناموجود</h2>
+        {% else %}
+        <h4>موجود</h2>
+            {% if  book.isBorrowed == False %}
+            <h4>اجاره نشده</h4>
+            {% else %}
+            <h4>اجاره شده</h4>
+            
+
+            <h4>
+                {{book.borrowerName}}
+            </h4>
+            <h4>
+                {{book.borrowerNumber}}
+            </h4>
+            <h4>
+                {{book.borrow_date}}
+            </h4>
+            <h4>
+                {{book.return_date}}
+        </h4>
+        
+        {% endif %}
+        {% endif %}
+        <a href="{% url "book_list" %}" >
+            رفتن به صفحه کتاب ها 
+            <a>
+            {% endblock body %}

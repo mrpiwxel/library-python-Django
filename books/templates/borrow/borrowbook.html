@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block header %}قرض گرفتن کتاب {{book.title}}{% endblock header %}
+{% block style %}
+form{
+direction:rtl;
+}
+{% endblock  %}
+{% block body %}
+    <form action="/book/{{book.id}}/borrow/" method="post">
+        {% csrf_token %}
+        <br><br>
+        نام اجاره کننده : 
+        <input type="text" name="BorrowerName" required >
+        <br><br>
+        شماره اجاره کننده :
+        <input type="text" name="BorrowerNumber" required >
+        <br><br>
+        تاریخ اجاره کتاب :
+        <input type="datetime-local" name="uBorrow_Date"  required />
+        <br><br>
+        تاریخ برگرداندن کتاب :
+        <input type="datetime-local" name="uReturn_Date" required  />
+        <br><br>
+        <input type="submit" value="اجاره"/>
+        <br><br>
+        </form>
+
+{% endblock body %}

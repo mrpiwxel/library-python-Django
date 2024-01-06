@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block header %}
+فهرست اجاره کتاب ها
+{% endblock header %}
+{% block  style%}
+         .booklist {
+                display:flex;
+                justify-content:end;
+                list-style-type:none;
+                padding:5px;
+                box-shadow:2px 0px 2px 2px;
+            }
+            td ,tr{
+                margin:15px;
+                padding:5px 13px;
+                border : 0.2px black solid;
+            }
+            th{
+                text-align:center;
+                border : 0.2px black solid;
+            }
+            .book{
+                display:flex;
+                flex-direction:row;
+                padding:5px;
+                margin:3px;
+            }
+            .border{
+                width:20px
+                padding:3px;
+                margin:4px;
+            }
+{% endblock  %}
+{% block body %}
+{% if borrowed_books|length > 0 %}
+
+        <table class="booklist" >
+        <tr>
+            
+            <th>
+                تاریخ اجاره 
+            </th>
+            <th>
+                شماره اجاره کننده 
+            </th>
+            <th>
+                اسم اجاره کننده
+            </th>
+            <th>
+                عملیات 
+            </th>
+            <th>
+                وضعیت
+            </th>
+            <th>
+                ژانر
+            </th>
+            <th>
+                نویسنده
+            </th>
+            <th>
+                نام 
+            </th>
+            <th>
+                ایدی
+            </th>
+        </tr>
+        {% for book in borrowed_books %}
+        <tr>
+            
+                <td class="book-borrowDate">
+                    {{book.borrow_date}}
+                </td>
+                <td class="book-borrowerNumber">
+                    {{book.borrowerNumber}}
+                </td>            
+                <td class="book-borrowerName">
+                    {{book.borrowerName}}
+                </td>
+                <td class="crudforbook">
+                     <a href="{% url 'return_book' book.id %}">تحویل کتاب</a>
+                </td>
+            
+                <td class="book-available border">
+                    {% if  book.available == False %}
+                    <span style="color:red;">
+                        اجاره شده
+                    </span>
+                    {% else %}
+                    <span style="color:green;">
+                        قابل اجاره
+                    </span>
+                    {% endif %}
+                </td>
+
+                <td class="book-genre border">
+                    {{book.genre}}
+                </td>
+
+                <td class="book-author border">
+                    {{book.author}}
+                </td>
+                <td class="book-title border">
+                    {{ book.title }}
+                </td>
+                <td class="book-id border" >
+                    {{ book.id }}
+
+                </td>
+        </tr>
+         {% endfor %}
+        </table>    
+         {% else %}
+         <p> کتابی اجاره داده نشده </p>
+         {% endif %}
+{% endblock body %}
